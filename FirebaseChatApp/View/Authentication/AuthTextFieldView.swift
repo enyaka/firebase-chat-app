@@ -19,7 +19,7 @@ final class AuthTextFieldView: UIView {
         return iView
     }()
     
-    private let textField: UITextField = {
+    public let textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .white
@@ -50,6 +50,7 @@ final class AuthTextFieldView: UIView {
         backgroundColor = .clear
         iconView.image = viewModel.iconImage
         textField.attributedPlaceholder = viewModel.placeHolder
+        textField.isSecureTextEntry = viewModel.isPassword
         addSubviews(iconView, textField, dividerView)
     }
     

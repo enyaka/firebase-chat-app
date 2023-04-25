@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LoginViewProtocol: AnyObject {
+    func goToRegister()
+}
+
 final class LoginView: UIView {
     
     private let imageView: UIImageView = {
@@ -31,9 +35,11 @@ final class LoginView: UIView {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Login", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.tintColor = .white
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.layer.cornerRadius = 5
-        button.backgroundColor = .systemTeal
+        button.backgroundColor = .systemPurple
+        button.isEnabled = false
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
@@ -42,9 +48,24 @@ final class LoginView: UIView {
         let authStack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
         authStack.translatesAutoresizingMaskIntoConstraints = false
         authStack.axis = .vertical
-        authStack.spacing = 16
+        authStack.spacing = 18
         return authStack
     }()
+    
+    private let goToRegisterButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account ", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white])
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor.white]))
+        button.backgroundColor = .clear
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(goToRegisterTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    public var delegate: LoginViewProtocol?
+    
+    private var viewModel = LoginViewViewModel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,13 +79,12 @@ final class LoginView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubviews(imageView, authStackView)
+        emailContainerView.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordContainerView.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        addSubviews(imageView, authStackView, goToRegisterButton)
     }
     
     private func addConstraints() {
-        
-        
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
@@ -78,12 +98,41 @@ final class LoginView: UIView {
             authStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 32),
             authStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
             authStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -32),
+            
+            goToRegisterButton.rightAnchor.constraint(equalTo: rightAnchor),
+            goToRegisterButton.leftAnchor.constraint(equalTo: leftAnchor),
+            goToRegisterButton.bottomAnchor.constraint(equalTo: bottomAnchor),
 
         ])
+    }
+    
+    private func checkFormStatus() {
+        if viewModel.isFormValid {
+            loginButton.isEnabled = true
+        } else {
+            loginButton.isEnabled = false
+        }
+    }
+    
+    @objc private func textDidChange(sender: UITextField) {
+        if sender == emailContainerView.textField {
+            viewModel.email = sender.text
+        }
+        
+        if sender == passwordContainerView.textField {
+            viewModel.password = sender.text
+        }
+        
+        DispatchQueue.main.async {
+            self.checkFormStatus()
+        }
     }
     
     @objc func loginTapped() {
         print("DEBUG: Login Tapped")
     }
-
+    
+    @objc func goToRegisterTapped() {
+        delegate?.goToRegister()
+    }
 }

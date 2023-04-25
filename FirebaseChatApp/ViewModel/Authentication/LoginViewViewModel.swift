@@ -8,6 +8,11 @@
 import Foundation
 
 
-final class LoginViewViewModel {
+struct LoginViewViewModel {
+    var email: String?
+    var password: String?
     
+    var isFormValid: Bool {
+        return !(email?.isEmpty ?? true) && !(password?.isEmpty ?? true)
+    }
 }

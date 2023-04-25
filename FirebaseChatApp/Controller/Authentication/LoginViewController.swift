@@ -20,6 +20,7 @@ final class LoginViewController: UIViewController {
     private func configureUI() {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
+        loginView.delegate = self
         configureGradientBackgroud()
         view.addSubview(loginView)
     }
@@ -32,13 +33,12 @@ final class LoginViewController: UIViewController {
             loginView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-    
-    private func configureGradientBackgroud() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemBlue.cgColor, UIColor.systemGreen.cgColor]
-        gradient.locations = [0, 1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
-    }
 
+}
+
+extension LoginViewController: LoginViewProtocol {
+    func goToRegister() {
+        let registerVC = RegisterViewController()
+        navigationController?.pushViewController(registerVC, animated: true)
+    }
 }

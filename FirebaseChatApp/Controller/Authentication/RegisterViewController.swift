@@ -18,6 +18,8 @@ final class RegisterViewController: UIViewController {
     }
     
     private func configureUI() {
+        configureGradientBackgroud()
+        registerView.delegate = self
         view.addSubview(registerView)
     }
     
@@ -28,5 +30,11 @@ final class RegisterViewController: UIViewController {
             registerView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             registerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+}
+
+extension RegisterViewController: RegisterViewProtocol {
+    func popToLogin() {
+        navigationController?.popViewController(animated: true)
     }
 }

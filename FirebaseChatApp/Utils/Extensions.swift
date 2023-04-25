@@ -7,6 +7,16 @@
 
 import UIKit
 
+extension UIViewController {
+    func configureGradientBackgroud() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.systemBlue.cgColor, UIColor.systemPurple.cgColor]
+        gradient.locations = [0, 1]
+        view.layer.addSublayer(gradient)
+        gradient.frame = view.frame
+    }
+}
+
 extension UIView {
     func addSubviews(_ views: UIView...) {
            views.forEach({ addSubview($0) })
