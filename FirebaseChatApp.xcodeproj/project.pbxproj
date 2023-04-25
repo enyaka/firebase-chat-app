@@ -12,6 +12,7 @@
 		FCE1A4BA29F7FABF00F136D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE1A4B929F7FABF00F136D7 /* Assets.xcassets */; };
 		FCE1A4BD29F7FABF00F136D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE1A4BB29F7FABF00F136D7 /* LaunchScreen.storyboard */; };
 		FCE1A4CB29F7FBFF00F136D7 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4CA29F7FBFF00F136D7 /* ConversationsViewController.swift */; };
+		FCE1A4CE29F802AF00F136D7 /* ConservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		FCE1A4BC29F7FABF00F136D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCE1A4BE29F7FABF00F136D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCE1A4CA29F7FBFF00F136D7 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
+		FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		FCE1A4C629F7FBC600F136D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -90,6 +93,7 @@
 		FCE1A4C729F7FBC900F136D7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1A4CF29F8065900F136D7 /* Authentication */,
 				FCE1A4CA29F7FBFF00F136D7 /* ConversationsViewController.swift */,
 			);
 			path = Controller;
@@ -118,6 +122,13 @@
 				FCE1A4BB29F7FABF00F136D7 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		FCE1A4CF29F8065900F136D7 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				FCE1A4B129F7FABE00F136D7 /* AppDelegate.swift in Sources */,
 				FCE1A4B329F7FABE00F136D7 /* SceneDelegate.swift in Sources */,
 				FCE1A4CB29F7FBFF00F136D7 /* ConversationsViewController.swift in Sources */,
+				FCE1A4CE29F802AF00F136D7 /* ConservationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
