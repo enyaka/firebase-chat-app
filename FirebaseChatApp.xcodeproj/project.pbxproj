@@ -13,6 +13,14 @@
 		FCE1A4BD29F7FABF00F136D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE1A4BB29F7FABF00F136D7 /* LaunchScreen.storyboard */; };
 		FCE1A4CB29F7FBFF00F136D7 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4CA29F7FBFF00F136D7 /* ConversationsViewController.swift */; };
 		FCE1A4CE29F802AF00F136D7 /* ConservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */; };
+		FCE1A4D129F8069E00F136D7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4D029F8069E00F136D7 /* LoginViewController.swift */; };
+		FCE1A4D329F806B500F136D7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4D229F806B500F136D7 /* RegisterViewController.swift */; };
+		FCE1A4D629F806D200F136D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4D529F806D200F136D7 /* LoginView.swift */; };
+		FCE1A4D829F806DC00F136D7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4D729F806DC00F136D7 /* RegisterView.swift */; };
+		FCE1A4DA29F80A4000F136D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4D929F80A4000F136D7 /* Extensions.swift */; };
+		FCE1A4DC29F8111B00F136D7 /* AuthTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4DB29F8111B00F136D7 /* AuthTextFieldView.swift */; };
+		FCE1A4E029F815C000F136D7 /* LoginViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4DF29F815C000F136D7 /* LoginViewViewModel.swift */; };
+		FCE1A4E229F815EE00F136D7 /* AuthTextFieldViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4E129F815EE00F136D7 /* AuthTextFieldViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +32,14 @@
 		FCE1A4BE29F7FABF00F136D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCE1A4CA29F7FBFF00F136D7 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationsView.swift; sourceTree = "<group>"; };
+		FCE1A4D029F8069E00F136D7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FCE1A4D229F806B500F136D7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		FCE1A4D529F806D200F136D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FCE1A4D729F806DC00F136D7 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		FCE1A4D929F80A4000F136D7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FCE1A4DB29F8111B00F136D7 /* AuthTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldView.swift; sourceTree = "<group>"; };
+		FCE1A4DF29F815C000F136D7 /* LoginViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewModel.swift; sourceTree = "<group>"; };
+		FCE1A4E129F815EE00F136D7 /* AuthTextFieldViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,7 @@
 		FCE1A4C529F7FBBD00F136D7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1A4DE29F815B100F136D7 /* Authentication */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -85,6 +102,7 @@
 		FCE1A4C629F7FBC600F136D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1A4D429F806C500F136D7 /* Authentication */,
 				FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */,
 			);
 			path = View;
@@ -109,6 +127,7 @@
 		FCE1A4C929F7FBD200F136D7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1A4D929F80A4000F136D7 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -127,6 +146,27 @@
 		FCE1A4CF29F8065900F136D7 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1A4D029F8069E00F136D7 /* LoginViewController.swift */,
+				FCE1A4D229F806B500F136D7 /* RegisterViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		FCE1A4D429F806C500F136D7 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				FCE1A4D529F806D200F136D7 /* LoginView.swift */,
+				FCE1A4D729F806DC00F136D7 /* RegisterView.swift */,
+				FCE1A4DB29F8111B00F136D7 /* AuthTextFieldView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		FCE1A4DE29F815B100F136D7 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				FCE1A4DF29F815C000F136D7 /* LoginViewViewModel.swift */,
+				FCE1A4E129F815EE00F136D7 /* AuthTextFieldViewViewModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -201,9 +241,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE1A4E029F815C000F136D7 /* LoginViewViewModel.swift in Sources */,
 				FCE1A4B129F7FABE00F136D7 /* AppDelegate.swift in Sources */,
+				FCE1A4DA29F80A4000F136D7 /* Extensions.swift in Sources */,
+				FCE1A4D629F806D200F136D7 /* LoginView.swift in Sources */,
 				FCE1A4B329F7FABE00F136D7 /* SceneDelegate.swift in Sources */,
 				FCE1A4CB29F7FBFF00F136D7 /* ConversationsViewController.swift in Sources */,
+				FCE1A4E229F815EE00F136D7 /* AuthTextFieldViewViewModel.swift in Sources */,
+				FCE1A4D329F806B500F136D7 /* RegisterViewController.swift in Sources */,
+				FCE1A4DC29F8111B00F136D7 /* AuthTextFieldView.swift in Sources */,
+				FCE1A4D829F806DC00F136D7 /* RegisterView.swift in Sources */,
+				FCE1A4D129F8069E00F136D7 /* LoginViewController.swift in Sources */,
 				FCE1A4CE29F802AF00F136D7 /* ConservationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
