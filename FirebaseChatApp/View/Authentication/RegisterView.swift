@@ -8,7 +8,8 @@
 import UIKit
 
 protocol RegisterViewProtocol: AnyObject {
-    func popToLogin()
+    func registerView(_ registerView: RegisterView)
+    func didSelectPhoto(_ registerView: RegisterView)
 }
 
 final class RegisterView: UIView {
@@ -18,6 +19,7 @@ final class RegisterView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "add_photo.png"), for: .normal)
         button.tintColor = .white
+        button.clipsToBounds = true
         button.addTarget(self, action: #selector(addPhotoTapped), for: .touchUpInside)
         return button
     }()
@@ -50,6 +52,7 @@ final class RegisterView: UIView {
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.layer.cornerRadius = 5
         button.backgroundColor = .systemPurple
+        button.isEnabled = false
         button.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         return button
     }()
@@ -74,15 +77,26 @@ final class RegisterView: UIView {
     }()
     
     public var delegate: RegisterViewProtocol?
+    
+    private var viewModel: RegisterViewViewModel = RegisterViewViewModel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         addConstraints()
+        configureNotificationObservers()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func changePlusPhotoImage(_ image: UIImage?) {
+        guard let image = image else { return }
+        plusPhotoButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        plusPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
+        plusPhotoButton.layer.borderWidth = 3.0
+        plusPhotoButton.layer.cornerRadius = 150/2
     }
     
     private func configureUI() {
@@ -113,8 +127,41 @@ final class RegisterView: UIView {
         ])
     }
     
-    @objc func addPhotoTapped() {
+    private func configureNotificationObservers() {
+        emailContainerView.textField.addTarget(self, action: #selector(textDidChange), for:
+            .editingChanged)
+        passwordContainerView.textField.addTarget(self, action: #selector(textDidChange), for:
+            .editingChanged)
+        usernameContainerView.textField.addTarget(self, action: #selector(textDidChange), for:
+            .editingChanged)
+        fullnameContainerView.textField.addTarget(self, action: #selector(textDidChange), for:
+            .editingChanged)
+    }
+    
+
+    
+    @objc private func textDidChange(sender: UITextField) {
         
+        switch sender {
+        case emailContainerView.textField:
+            viewModel.email = sender.text
+        case passwordContainerView.textField:
+            viewModel.password = sender.text
+        case usernameContainerView.textField:
+            viewModel.username = sender.text
+        case fullnameContainerView.textField:
+            viewModel.fullname = sender.text
+        default:
+            break
+        }
+        DispatchQueue.main.async {
+            self.checkFormStatus()
+        }
+    }
+    
+    
+    @objc func addPhotoTapped() {
+        delegate?.didSelectPhoto(self)
     }
     
     @objc func signUpTapped() {
@@ -122,6 +169,16 @@ final class RegisterView: UIView {
     }
     
     @objc func goToLoginTapped() {
-        delegate?.popToLogin()
+        delegate?.registerView(self)
+    }
+}
+
+extension RegisterView: AuthenticationViewProtocol {
+    func checkFormStatus() {
+        if viewModel.isFormValid {
+            signUpButton.isEnabled = true
+        } else {
+            signUpButton.isEnabled = false
+        }
     }
 }

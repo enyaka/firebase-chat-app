@@ -11,6 +11,10 @@ protocol LoginViewProtocol: AnyObject {
     func goToRegister()
 }
 
+protocol AuthenticationViewProtocol {
+    func checkFormStatus()
+}
+
 final class LoginView: UIView {
     
     private let imageView: UIImageView = {
@@ -71,16 +75,17 @@ final class LoginView: UIView {
         super.init(frame: frame)
         configureUI()
         addConstraints()
+        configureNotificationObservers()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        emailContainerView.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        passwordContainerView.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         addSubviews(imageView, authStackView, goToRegisterButton)
     }
     
@@ -106,12 +111,10 @@ final class LoginView: UIView {
         ])
     }
     
-    private func checkFormStatus() {
-        if viewModel.isFormValid {
-            loginButton.isEnabled = true
-        } else {
-            loginButton.isEnabled = false
-        }
+
+    private func configureNotificationObservers() {
+        emailContainerView.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordContainerView.textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     @objc private func textDidChange(sender: UITextField) {
@@ -134,5 +137,15 @@ final class LoginView: UIView {
     
     @objc func goToRegisterTapped() {
         delegate?.goToRegister()
+    }
+}
+
+extension LoginView: AuthenticationViewProtocol {
+    func checkFormStatus() {
+        if viewModel.isFormValid {
+            loginButton.isEnabled = true
+        } else {
+            loginButton.isEnabled = false
+        }
     }
 }

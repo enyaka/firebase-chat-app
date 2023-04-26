@@ -34,7 +34,26 @@ final class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController: RegisterViewProtocol {
-    func popToLogin() {
+    
+    func didSelectPhoto(_ registerView: RegisterView) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.allowsEditing = true
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
+    }
+
+    func registerView(_ registerView: RegisterView) {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        DispatchQueue.main.async {
+            self.registerView.changePlusPhotoImage(image)
+        }
+        dismiss(animated: true)
     }
 }
