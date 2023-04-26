@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import JGProgressHUD
+
 
 extension UIViewController {
     func configureGradientBackgroud() {
@@ -28,9 +30,16 @@ extension Encodable {
 }
 
 extension UIView {
+    static var hud = JGProgressHUD(style: .dark)
     func addSubviews(_ views: UIView...) {
            views.forEach({ addSubview($0) })
        }
+    
+    func handleLoader(_ show: Bool, withText text: String = "") {
+        self.endEditing(true)
+        UIView.hud.textLabel.text = text
+        show ? UIView.hud.show(in: self) : UIView.hud.dismiss()
+    }
     
     /*
      func anchor(top: NSLayoutYAxisAnchor? = nil,

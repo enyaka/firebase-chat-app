@@ -37,7 +37,7 @@ final class LoginViewViewModel: AuthenticationViewModelProtocol {
         self.currentState?(.loading)
 
         AuthenticationService.shared.signInUser(email: email, password: password) { [weak self] result in
-            guard let self else {return}
+            guard let self else { return }
             switch result {
             case .success(_):
                 self.currentState?(.loaded)

@@ -136,19 +136,19 @@ final class RegisterView: UIView {
     private func bindToStateObserver() {
         viewModel.bindToState { [weak self] state in
             guard let self else { return }
-            switch state {
-            case .loading:
-                self.signUpButton.isEnabled = false
-//                self.spinner.startAnimating()
-                break
-            case .error(let error):
-                print(error)
-                self.signUpButton.isEnabled = true
-//                self.spinner.stopAnimating()
-                break
-            case .loaded:
-                self.delegate?.userRegistered(self)
-                break
+            DispatchQueue.main.async {
+                switch state {
+                case .loading:
+                    self.signUpButton.isEnabled = false
+                    self.handleLoader(true, withText: "Singin in")
+                case .error(let error):
+                    print(error)
+                    self.signUpButton.isEnabled = true
+                    self.handleLoader(false)
+                case .loaded:
+                    self.handleLoader(false)
+                    self.delegate?.userRegistered(self)
+                }
             }
         }
     }

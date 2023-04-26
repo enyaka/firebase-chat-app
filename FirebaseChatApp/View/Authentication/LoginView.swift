@@ -57,12 +57,6 @@ final class LoginView: UIView {
         return authStack
     }()
     
-    private let spinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: .large)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.hidesWhenStopped = true
-        return spinner
-    }()
     
     private let goToRegisterButton: UIButton = {
         let button = UIButton(type: .system)
@@ -95,7 +89,7 @@ final class LoginView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(imageView, authStackView, goToRegisterButton, spinner)
+        addSubviews(imageView, authStackView, goToRegisterButton)
     }
     
     private func addConstraints() {
@@ -113,10 +107,6 @@ final class LoginView: UIView {
             authStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
             authStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -32),
             
-            spinner.widthAnchor.constraint(equalToConstant: 100),
-            spinner.heightAnchor.constraint(equalToConstant: 100),
-            spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             goToRegisterButton.rightAnchor.constraint(equalTo: rightAnchor),
             goToRegisterButton.leftAnchor.constraint(equalTo: leftAnchor),
@@ -127,19 +117,19 @@ final class LoginView: UIView {
     private func bindToStateObserver() {
         viewModel.bindToState { [weak self] state in
             guard let self else { return }
-            switch state {
-            case .loading:
-                self.loginButton.isEnabled = false
-                self.spinner.startAnimating()
-                break
-            case .error(let error):
-                print(error)
-                self.loginButton.isEnabled = true
-                self.spinner.stopAnimating()
-                break
-            case .loaded:
+            DispatchQueue.main.async {
+                switch state {
+                case .loading:
+                    self.loginButton.isEnabled = false
+                    self.handleLoader(true, withText: "Loggin in")
+                case .error(let error):
+                    print(error)
+                    self.loginButton.isEnabled = true
+                    self.handleLoader(false)
+                case .loaded:
+                    self.handleLoader(false)
                     self.delegate?.userSignedIn(self)
-                break
+                }
             }
         }
     }
@@ -166,6 +156,22 @@ final class LoginView: UIView {
     
     @objc func loginTapped() {
         viewModel.signInUser()
+    }
+    
+    @objc func keyboardWillShow() {
+        print("G")
+        if frame.origin.y == 0 {
+            frame.origin.y -= 88
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        
+        if frame.origin.y != 0 {
+            frame.origin.y = 0
+            print("v")
+
+        }
     }
     
     @objc func goToRegisterTapped() {
