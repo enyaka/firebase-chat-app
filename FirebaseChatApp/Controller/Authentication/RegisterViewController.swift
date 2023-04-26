@@ -51,9 +51,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
-        DispatchQueue.main.async {
-            self.registerView.changePlusPhotoImage(image)
-        }
+        registerView.changePlusPhotoImage(image)
         dismiss(animated: true)
     }
 }

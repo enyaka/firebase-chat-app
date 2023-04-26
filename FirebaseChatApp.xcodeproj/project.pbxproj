@@ -15,6 +15,9 @@
 		FCCE816829F9582C00F2980C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FCCE816729F9582C00F2980C /* FirebaseStorage */; };
 		FCCE816B29F9587200F2980C /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FCCE816A29F9587200F2980C /* JGProgressHUD */; };
 		FCCE816E29F9589C00F2980C /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = FCCE816D29F9589C00F2980C /* SDWebImage */; };
+		FCCE817029F95D8A00F2980C /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE816F29F95D8A00F2980C /* AuthenticationService.swift */; };
+		FCCE817329F95FE800F2980C /* RegisterationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE817229F95FE800F2980C /* RegisterationModel.swift */; };
+		FCCE817529F9661600F2980C /* CostumErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE817429F9661600F2980C /* CostumErrors.swift */; };
 		FCE1A4B129F7FABE00F136D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4B029F7FABE00F136D7 /* AppDelegate.swift */; };
 		FCE1A4B329F7FABE00F136D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE1A4B229F7FABE00F136D7 /* SceneDelegate.swift */; };
 		FCE1A4BA29F7FABF00F136D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE1A4B929F7FABF00F136D7 /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* Begin PBXFileReference section */
 		FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		FCCE815E29F9571700F2980C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCCE816F29F95D8A00F2980C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		FCCE817229F95FE800F2980C /* RegisterationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationModel.swift; sourceTree = "<group>"; };
+		FCCE817429F9661600F2980C /* CostumErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumErrors.swift; sourceTree = "<group>"; };
 		FCE1A4AD29F7FABE00F136D7 /* FirebaseChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE1A4B029F7FABE00F136D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCE1A4B229F7FABE00F136D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FCCE817129F95FDB00F2980C /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				FCCE817229F95FE800F2980C /* RegisterationModel.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		FCE1A4A429F7FABE00F136D7 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +118,7 @@
 		FCE1A4C429F7FBB700F136D7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FCCE817129F95FDB00F2980C /* Authentication */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +152,7 @@
 		FCE1A4C829F7FBCD00F136D7 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FCCE816F29F95D8A00F2980C /* AuthenticationService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -145,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				FCE1A4D929F80A4000F136D7 /* Extensions.swift */,
+				FCCE817429F9661600F2980C /* CostumErrors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -277,6 +294,8 @@
 				FCE1A4B129F7FABE00F136D7 /* AppDelegate.swift in Sources */,
 				FCE1A4DA29F80A4000F136D7 /* Extensions.swift in Sources */,
 				FCE1A4D629F806D200F136D7 /* LoginView.swift in Sources */,
+				FCCE817329F95FE800F2980C /* RegisterationModel.swift in Sources */,
+				FCCE817529F9661600F2980C /* CostumErrors.swift in Sources */,
 				FCE1A4B329F7FABE00F136D7 /* SceneDelegate.swift in Sources */,
 				FCE1A4CB29F7FBFF00F136D7 /* ConversationsViewController.swift in Sources */,
 				FCE1A4E229F815EE00F136D7 /* AuthTextFieldViewViewModel.swift in Sources */,
@@ -286,6 +305,7 @@
 				FCE1A4D829F806DC00F136D7 /* RegisterView.swift in Sources */,
 				FCE1A4D129F8069E00F136D7 /* LoginViewController.swift in Sources */,
 				FCE1A4CE29F802AF00F136D7 /* ConservationsView.swift in Sources */,
+				FCCE817029F95D8A00F2980C /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

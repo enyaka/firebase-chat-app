@@ -19,6 +19,7 @@ final class RegisterView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "add_photo.png"), for: .normal)
         button.tintColor = .white
+        button.imageView?.contentMode = .scaleAspectFill
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(addPhotoTapped), for: .touchUpInside)
         return button
@@ -93,10 +94,13 @@ final class RegisterView: UIView {
     
     public func changePlusPhotoImage(_ image: UIImage?) {
         guard let image = image else { return }
-        plusPhotoButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
-        plusPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
-        plusPhotoButton.layer.borderWidth = 3.0
-        plusPhotoButton.layer.cornerRadius = 150/2
+        viewModel.profileImage = image
+        DispatchQueue.main.async {
+            self.plusPhotoButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+            self.plusPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
+            self.plusPhotoButton.layer.borderWidth = 3.0
+            self.plusPhotoButton.layer.cornerRadius = 150/2
+        }
     }
     
     private func configureUI() {
@@ -165,7 +169,7 @@ final class RegisterView: UIView {
     }
     
     @objc func signUpTapped() {
-        
+        viewModel.register()
     }
     
     @objc func goToLoginTapped() {
