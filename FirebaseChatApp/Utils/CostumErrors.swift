@@ -13,6 +13,7 @@ enum CostumError: Error {
     case failedToDownloadImageUrl(String)
     case failedToRegisterUser(String)
     case failedToUpdateDatabase(String)
+    case failedToSingIn(String)
 }
 
 extension CostumError: LocalizedError {
@@ -27,6 +28,8 @@ extension CostumError: LocalizedError {
             case .failedToRegisterUser(let error):
                 return NSLocalizedString(error, comment: "My error")
             case .failedToUpdateDatabase(let error):
+                return NSLocalizedString(error, comment: "My error")
+            case .failedToSingIn(let error):
                 return NSLocalizedString(error, comment: "My error")
             }
         }

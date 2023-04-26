@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class ConversationsViewController: UIViewController {
     
@@ -13,6 +14,7 @@ final class ConversationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkUserAuthenticate()
         configureUI()
         addConstraints()
     }
@@ -35,8 +37,31 @@ final class ConversationsViewController: UIViewController {
         ])
     }
     
+    private func checkUserAuthenticate() {
+        if Auth.auth().currentUser?.uid == nil {
+            presentLoginScreen()
+        } else {
+
+        }
+    }
+    
     @objc func showProfile() {
-        print("DEBUG: Show Profile")
+        do {
+            try Auth.auth().signOut()
+            presentLoginScreen()
+        } catch {
+            print("DEBUG: Auth error")
+
+        }
+    }
+    
+    func presentLoginScreen() {
+        DispatchQueue.main.async {
+            let vc = LoginViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
     }
 
 }

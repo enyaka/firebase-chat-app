@@ -10,6 +10,7 @@ import UIKit
 protocol RegisterViewProtocol: AnyObject {
     func registerView(_ registerView: RegisterView)
     func didSelectPhoto(_ registerView: RegisterView)
+    func userRegistered(_ registerView: RegisterView)
 }
 
 final class RegisterView: UIView {
@@ -86,6 +87,7 @@ final class RegisterView: UIView {
         configureUI()
         addConstraints()
         configureNotificationObservers()
+        bindToStateObserver()
     }
     
     required init?(coder: NSCoder) {
@@ -129,6 +131,26 @@ final class RegisterView: UIView {
             goToLoginButton.leftAnchor.constraint(equalTo: leftAnchor),
             goToLoginButton.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
+    }
+    
+    private func bindToStateObserver() {
+        viewModel.bindToState { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .loading:
+                self.signUpButton.isEnabled = false
+//                self.spinner.startAnimating()
+                break
+            case .error(let error):
+                print(error)
+                self.signUpButton.isEnabled = true
+//                self.spinner.stopAnimating()
+                break
+            case .loaded:
+                self.delegate?.userRegistered(self)
+                break
+            }
+        }
     }
     
     private func configureNotificationObservers() {

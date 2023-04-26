@@ -8,18 +8,24 @@
 import UIKit
 import FirebaseStorage
 
-struct RegisterViewViewModel: AuthenticationViewModelProtocol {
+final class RegisterViewViewModel: AuthenticationViewModelProtocol {
     var email: String?
     var password: String?
     var fullname: String?
     var username: String?
     var profileImage: UIImage?
     
+    private var currentState: ((CostumGlobalStates) -> Void)?
+    
     var isFormValid: Bool {
         return !(email?.isEmpty ?? true)
         && !(password?.isEmpty ?? true)
         && !(fullname?.isEmpty ?? true)
         && !(username?.isEmpty ?? true)
+    }
+    
+    public func bindToState(_ bind: @escaping (CostumGlobalStates) -> Void) {
+        self.currentState = bind
     }
     
     public func register() {
@@ -31,12 +37,14 @@ struct RegisterViewViewModel: AuthenticationViewModelProtocol {
         guard let fullname = fullname?.lowercased() else { return }
         let registerInfo = RegisterationModel(email: email, password: password, username: username, fullname: fullname)
         
-        AuthenticationService.shared.registerUser(registerInfo, imageData: imageData) { result in
+        AuthenticationService.shared.registerUser(registerInfo, imageData: imageData) { [weak self] result in
+            guard let self else { return }
+            self.currentState?(.loading)
             switch result {
             case .success(let success):
-                print("DEBUG: Succesful registeration: \(success)")
+                self.currentState?(.loaded)
             case .failure(let failure):
-                print("DEBUG: Failed registeration: \(failure.localizedDescription)")
+                self.currentState?(.error(failure.localizedDescription))
             }
         }
     }

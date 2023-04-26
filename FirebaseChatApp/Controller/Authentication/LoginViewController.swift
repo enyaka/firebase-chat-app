@@ -37,7 +37,13 @@ final class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginViewProtocol {
-    func goToRegister() {
+    func userSignedIn(_ loginView: LoginView) {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
+        }
+    }
+    
+    func goToRegister(_ loginView: LoginView) {
         let registerVC = RegisterViewController()
         navigationController?.pushViewController(registerVC, animated: true)
     }

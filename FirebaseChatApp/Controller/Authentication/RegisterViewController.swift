@@ -35,6 +35,12 @@ final class RegisterViewController: UIViewController {
 
 extension RegisterViewController: RegisterViewProtocol {
     
+    func userRegistered(_ registerView: RegisterView) {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
+        }
+    }
+    
     func didSelectPhoto(_ registerView: RegisterView) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true

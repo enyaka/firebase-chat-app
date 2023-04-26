@@ -8,7 +8,8 @@
 import UIKit
 
 protocol LoginViewProtocol: AnyObject {
-    func goToRegister()
+    func goToRegister(_ loginView: LoginView)
+    func userSignedIn(_ loginView: LoginView)
 }
 
 protocol AuthenticationViewProtocol {
@@ -56,6 +57,13 @@ final class LoginView: UIView {
         return authStack
     }()
     
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.hidesWhenStopped = true
+        return spinner
+    }()
+    
     private let goToRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +84,7 @@ final class LoginView: UIView {
         configureUI()
         addConstraints()
         configureNotificationObservers()
+        bindToStateObserver()
     }
     
     required init?(coder: NSCoder) {
@@ -86,7 +95,7 @@ final class LoginView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(imageView, authStackView, goToRegisterButton)
+        addSubviews(imageView, authStackView, goToRegisterButton, spinner)
     }
     
     private func addConstraints() {
@@ -104,11 +113,35 @@ final class LoginView: UIView {
             authStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
             authStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -32),
             
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.heightAnchor.constraint(equalToConstant: 100),
+            spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
             goToRegisterButton.rightAnchor.constraint(equalTo: rightAnchor),
             goToRegisterButton.leftAnchor.constraint(equalTo: leftAnchor),
             goToRegisterButton.bottomAnchor.constraint(equalTo: bottomAnchor),
 
         ])
+    }
+    private func bindToStateObserver() {
+        viewModel.bindToState { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .loading:
+                self.loginButton.isEnabled = false
+                self.spinner.startAnimating()
+                break
+            case .error(let error):
+                print(error)
+                self.loginButton.isEnabled = true
+                self.spinner.stopAnimating()
+                break
+            case .loaded:
+                    self.delegate?.userSignedIn(self)
+                break
+            }
+        }
     }
     
 
@@ -132,11 +165,11 @@ final class LoginView: UIView {
     }
     
     @objc func loginTapped() {
-        print("DEBUG: Login Tapped")
+        viewModel.signInUser()
     }
     
     @objc func goToRegisterTapped() {
-        delegate?.goToRegister()
+        delegate?.goToRegister(self)
     }
 }
 
