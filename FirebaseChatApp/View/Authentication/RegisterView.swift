@@ -88,7 +88,7 @@ final class RegisterView: UIView {
         configureUI()
         addConstraints()
         configureNotificationObservers()
-        bindToStateObserver()
+        bindToEventObserver()
     }
     
     required init?(coder: NSCoder) {
@@ -139,11 +139,11 @@ final class RegisterView: UIView {
         ])
     }
     
-    private func bindToStateObserver() {
-        viewModel.bindToState { [weak self] state in
+    private func bindToEventObserver() {
+        viewModel.bindToEvent { [weak self] event in
             guard let self else { return }
             DispatchQueue.main.async {
-                switch state {
+                switch event {
                 case .loading:
                     self.signUpButton.isEnabled = false
                     self.handleLoader(true, withText: "Singin in")

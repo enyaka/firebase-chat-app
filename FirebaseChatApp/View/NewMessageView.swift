@@ -12,16 +12,20 @@ final class NewMessageView: UIView {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: NewMessageView.cellIdentifier)
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.cellIdentifier)
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 80
         return tableView
     }()
     
+    private let viewModel = NewMessageViewViewModel()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         addConstraints()
+        bindToEventObserver()
+        viewModel.fetchAllUsers()
     }
     
     required init?(coder: NSCoder) {
@@ -43,17 +47,35 @@ final class NewMessageView: UIView {
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+    
+    private func bindToEventObserver() {
+        viewModel.bindToCurrentEvent { [weak self] event in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                switch event {
+                case .loading:
+                    self.handleLoader(true, withText: "Loading")
+                case .error(let error):
+                    self.handleLoader(false)
+                    print(error)
+                case .loaded:
+                    self.handleLoader(false)
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
 }
 
 extension NewMessageView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        viewModel.users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewMessageView.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = "Test"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.cellIdentifier, for: indexPath) as? UserTableViewCell else { fatalError("Fatal Error: Casting cell") }
+        cell.configure(with: UserTableViewCellViewModel(user: viewModel.users[indexPath.row]))
         return cell
     }
 }

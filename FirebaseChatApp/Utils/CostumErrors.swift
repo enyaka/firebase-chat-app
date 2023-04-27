@@ -14,6 +14,7 @@ enum CostumError: Error {
     case failedToRegisterUser(String)
     case failedToUpdateDatabase(String)
     case failedToSingIn(String)
+    case failedToFetchData(String)
 }
 
 extension CostumError: LocalizedError {
@@ -30,6 +31,8 @@ extension CostumError: LocalizedError {
             case .failedToUpdateDatabase(let error):
                 return NSLocalizedString(error, comment: "My error")
             case .failedToSingIn(let error):
+                return NSLocalizedString(error, comment: "My error")
+            case .failedToFetchData(let error):
                 return NSLocalizedString(error, comment: "My error")
             }
         }

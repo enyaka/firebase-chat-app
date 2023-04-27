@@ -15,7 +15,7 @@ final class RegisterViewViewModel: AuthenticationViewModelProtocol {
     var username: String?
     var profileImage: UIImage?
     
-    private var currentState: ((CostumGlobalStates) -> Void)?
+    private var currentEvent: ((CostumGlobalEvents) -> Void)?
     
     var isFormValid: Bool {
         return !(email?.isEmpty ?? true)
@@ -24,8 +24,8 @@ final class RegisterViewViewModel: AuthenticationViewModelProtocol {
         && !(username?.isEmpty ?? true)
     }
     
-    public func bindToState(_ bind: @escaping (CostumGlobalStates) -> Void) {
-        self.currentState = bind
+    public func bindToEvent(_ bind: @escaping (CostumGlobalEvents) -> Void) {
+        self.currentEvent = bind
     }
     
     public func register() {
@@ -36,14 +36,14 @@ final class RegisterViewViewModel: AuthenticationViewModelProtocol {
         guard let username = username?.lowercased() else { return }
         guard let fullname = fullname?.lowercased() else { return }
         let registerInfo = RegisterationModel(email: email, password: password, username: username, fullname: fullname)
-        self.currentState?(.loading)
+        self.currentEvent?(.loading)
         AuthenticationService.shared.registerUser(registerInfo, imageData: imageData) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let success):
-                self.currentState?(.loaded)
+                self.currentEvent?(.loaded)
             case .failure(let failure):
-                self.currentState?(.error(failure.localizedDescription))
+                self.currentEvent?(.error(failure.localizedDescription))
             }
         }
     }
