@@ -11,6 +11,7 @@ protocol RegisterViewProtocol: AnyObject {
     func registerView(_ registerView: RegisterView)
     func didSelectPhoto(_ registerView: RegisterView)
     func userRegistered(_ registerView: RegisterView)
+    func showError(_ registerView: RegisterView, withError error: String)
 }
 
 final class RegisterView: UIView {
@@ -142,9 +143,9 @@ final class RegisterView: UIView {
                     self.signUpButton.isEnabled = false
                     self.handleLoader(true, withText: "Singin in")
                 case .error(let error):
-                    print(error)
                     self.signUpButton.isEnabled = true
                     self.handleLoader(false)
+                    self.delegate?.showError(self, withError: error)
                 case .loaded:
                     self.handleLoader(false)
                     self.delegate?.userRegistered(self)

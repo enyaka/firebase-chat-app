@@ -37,6 +37,10 @@ final class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginViewProtocol {
+    func showError(_ loginView: LoginView, withError error: String) {
+            presentError(error)
+    }
+    
     func userSignedIn(_ loginView: LoginView) {
         DispatchQueue.main.async {
             self.dismiss(animated: true)

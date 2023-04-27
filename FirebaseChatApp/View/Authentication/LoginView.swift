@@ -10,6 +10,7 @@ import UIKit
 protocol LoginViewProtocol: AnyObject {
     func goToRegister(_ loginView: LoginView)
     func userSignedIn(_ loginView: LoginView)
+    func showError(_ loginView: LoginView, withError error: String)
 }
 
 protocol AuthenticationViewProtocol {
@@ -123,9 +124,9 @@ final class LoginView: UIView {
                     self.loginButton.isEnabled = false
                     self.handleLoader(true, withText: "Loggin in")
                 case .error(let error):
-                    print(error)
                     self.loginButton.isEnabled = true
                     self.handleLoader(false)
+                    self.delegate?.showError(self, withError: error)
                 case .loaded:
                     self.handleLoader(false)
                     self.delegate?.userSignedIn(self)

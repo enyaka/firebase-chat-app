@@ -34,6 +34,10 @@ final class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController: RegisterViewProtocol {
+    func showError(_ registerView: RegisterView, withError error: String) {
+        presentError(error)
+    }
+    
     
     func userRegistered(_ registerView: RegisterView) {
         DispatchQueue.main.async {

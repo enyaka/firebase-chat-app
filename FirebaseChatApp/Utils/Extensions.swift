@@ -10,12 +10,25 @@ import JGProgressHUD
 
 
 extension UIViewController {
+//    static var errorAlert = UIAlertController(title: "Error", message: nil, preferredStyle: .alert)
     func configureGradientBackgroud() {
         let gradient = CAGradientLayer()
         gradient.colors = [UIColor.systemBlue.cgColor, UIColor.systemPurple.cgColor]
         gradient.locations = [0, 1]
         view.layer.addSublayer(gradient)
         gradient.frame = view.frame
+    }
+    
+    func presentError(_ message: String, title: String = "Error" , action: String = "OK") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: action, style: .cancel)
+        alert.addAction(action)
+        present(alert, animated: true)
+//        UIViewController.errorAlert.message = message
+//        UIViewController.errorAlert.title = title
+//        UIViewController.errorAlert.addAction(UIAlertAction(title: action, style: .cancel))
+//        present(UIViewController.errorAlert, animated: true)
+        
     }
 }
 

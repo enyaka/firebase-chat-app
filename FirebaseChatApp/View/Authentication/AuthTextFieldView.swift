@@ -56,20 +56,20 @@ final class AuthTextFieldView: UIView {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            iconView.topAnchor.constraint(equalTo: topAnchor),
+            iconView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             iconView.leftAnchor.constraint(equalTo: leftAnchor),
-            iconView.heightAnchor.constraint(equalToConstant: 24),
-            iconView.widthAnchor.constraint(equalToConstant: 24),
+            iconView.bottomAnchor.constraint(equalTo: dividerView.topAnchor, constant: -5),
+            iconView.widthAnchor.constraint(equalToConstant: 25),
             
             dividerView.leftAnchor.constraint(equalTo: leftAnchor),
             dividerView.rightAnchor.constraint(equalTo: rightAnchor),
-            dividerView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 10),
+            dividerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             dividerView.heightAnchor.constraint(equalToConstant: 1),
 
-            
             textField.topAnchor.constraint(equalTo: topAnchor),
-            textField.leftAnchor.constraint(equalTo: iconView.rightAnchor, constant: 10),
-            textField.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            textField.leftAnchor.constraint(equalTo: iconView.rightAnchor, constant: 7),
+            textField.rightAnchor.constraint(equalTo: rightAnchor),
+            textField.bottomAnchor.constraint(equalTo: dividerView.topAnchor)
 
             
         ])
