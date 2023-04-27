@@ -10,7 +10,7 @@ import FirebaseAuth
 
 final class ConversationsViewController: UIViewController {
     
-    private let conservationsView = ConservationsView()
+    private let conversationsView = ConversationsView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +24,16 @@ final class ConversationsViewController: UIViewController {
         title = "Messages"
         let image = UIImage(systemName: "person.circle.fill")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showProfile))
-        view.addSubview(conservationsView)
+        conversationsView.delegate = self
+        view.addSubview(conversationsView)
     }
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            conservationsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            conservationsView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            conservationsView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            conservationsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            conversationsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            conversationsView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            conversationsView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            conversationsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
         ])
     }
@@ -63,5 +64,15 @@ final class ConversationsViewController: UIViewController {
             self.present(nav, animated: true)
         }
     }
+}
 
+extension ConversationsViewController: ConversationsViewProtocol {
+    func newMessage(_ conservationView: ConversationsView) {
+        let controller = NewMessageViewController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async {
+            self.present(nav, animated: true)
+        }
+    }
 }
