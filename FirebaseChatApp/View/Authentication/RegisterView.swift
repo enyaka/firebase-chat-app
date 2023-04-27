@@ -79,7 +79,7 @@ final class RegisterView: UIView {
         return button
     }()
     
-    public var delegate: RegisterViewProtocol?
+    public weak var delegate: RegisterViewProtocol?
     
     private var viewModel: RegisterViewViewModel = RegisterViewViewModel()
 
@@ -108,6 +108,11 @@ final class RegisterView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
+        emailContainerView.textField.delegate = self
+        fullnameContainerView.textField.delegate = self
+        usernameContainerView.textField.delegate = self
+        passwordContainerView.textField.delegate = self
+        emailContainerView.textField.resignFirstResponder()
         addSubviews(plusPhotoButton, authStackView, goToLoginButton)
     }
     
@@ -168,7 +173,6 @@ final class RegisterView: UIView {
 
     
     @objc private func textDidChange(sender: UITextField) {
-        
         switch sender {
         case emailContainerView.textField:
             viewModel.email = sender.text
@@ -197,6 +201,24 @@ final class RegisterView: UIView {
     
     @objc func goToLoginTapped() {
         delegate?.registerView(self)
+    }
+}
+
+extension RegisterView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailContainerView.textField:
+            fullnameContainerView.textField.becomeFirstResponder()
+        case fullnameContainerView.textField:
+            usernameContainerView.textField.becomeFirstResponder()
+        case usernameContainerView.textField:
+            passwordContainerView.textField.becomeFirstResponder()
+        case passwordContainerView.textField:
+            signUpTapped()
+        default:
+            break
+        }
+        return true
     }
 }
 

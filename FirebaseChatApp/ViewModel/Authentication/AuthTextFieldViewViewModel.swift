@@ -45,6 +45,10 @@ struct AuthTextFieldViewViewModel {
         }
     }
     
+    var returnKeyType: UIReturnKeyType {
+        type == .password ? .done : .continue
+    }
+    
     var isPassword: Bool {
         type == .password ? true : false
     }
@@ -57,3 +61,5 @@ struct AuthTextFieldViewViewModel {
         NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
     }
 }
+
+

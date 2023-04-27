@@ -21,6 +21,9 @@ final class AuthTextFieldView: UIView {
     
     public let textField: UITextField = {
         let textField = UITextField()
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .white
         return textField
@@ -51,6 +54,7 @@ final class AuthTextFieldView: UIView {
         iconView.image = viewModel.iconImage
         textField.attributedPlaceholder = viewModel.placeHolder
         textField.isSecureTextEntry = viewModel.isPassword
+        textField.returnKeyType = viewModel.returnKeyType
         addSubviews(iconView, textField, dividerView)
     }
     
@@ -70,7 +74,6 @@ final class AuthTextFieldView: UIView {
             textField.leftAnchor.constraint(equalTo: iconView.rightAnchor, constant: 7),
             textField.rightAnchor.constraint(equalTo: rightAnchor),
             textField.bottomAnchor.constraint(equalTo: dividerView.topAnchor)
-
             
         ])
         

@@ -70,7 +70,7 @@ final class LoginView: UIView {
         return button
     }()
     
-    public var delegate: LoginViewProtocol?
+    public weak var delegate: LoginViewProtocol?
     
     private var viewModel = LoginViewViewModel()
 
@@ -86,11 +86,12 @@ final class LoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         addSubviews(imageView, authStackView, goToRegisterButton)
+        emailContainerView.textField.delegate = self
+        passwordContainerView.textField.delegate = self
+        emailContainerView.textField.resignFirstResponder()
     }
     
     private func addConstraints() {
@@ -177,6 +178,20 @@ final class LoginView: UIView {
     
     @objc func goToRegisterTapped() {
         delegate?.goToRegister(self)
+    }
+}
+
+extension LoginView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailContainerView.textField:
+            passwordContainerView.textField.becomeFirstResponder()
+        case passwordContainerView.textField:
+            loginTapped()
+        default:
+            break
+        }
+        return true
     }
 }
 
