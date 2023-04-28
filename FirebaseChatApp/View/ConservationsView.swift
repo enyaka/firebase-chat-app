@@ -48,6 +48,7 @@ final class ConversationsView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
+        
         tableView.delegate = self
         tableView.dataSource = self
         addSubviews(tableView, newMessageFloatingButton)
@@ -68,7 +69,6 @@ final class ConversationsView: UIView {
     }
     
     @objc func newMessageTapped() {
-        print("Go to new message")
         delegate?.newMessage(self)
     }
     

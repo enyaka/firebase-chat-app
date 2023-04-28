@@ -71,8 +71,8 @@ final class UserTableViewCell: UITableViewCell {
     }
     
     public func configure(with viewModel: UserTableViewCellViewModel) {
-        profileImageView.sd_setImage(with: URL(string: viewModel.user.profileImageUrl))
-        fullnameLabel.text = viewModel.user.fullname
-        usernameLabel.text = viewModel.user.username
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        fullnameLabel.text = viewModel.fullname
+        usernameLabel.text = viewModel.username
     }
 }

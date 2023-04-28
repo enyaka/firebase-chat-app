@@ -14,6 +14,10 @@
 		FC1275AA29FABF2C00B35544 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275A929FABF2C00B35544 /* UserService.swift */; };
 		FC1275AC29FAC00400B35544 /* NewMessageViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275AB29FAC00400B35544 /* NewMessageViewViewModel.swift */; };
 		FC1275AE29FAC90300B35544 /* UserTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275AD29FAC90300B35544 /* UserTableViewCellViewModel.swift */; };
+		FC1275B029FAE61B00B35544 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275AF29FAE61B00B35544 /* ChatViewController.swift */; };
+		FC1275B229FAE63D00B35544 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275B129FAE63D00B35544 /* ChatView.swift */; };
+		FC1275B429FAE91900B35544 /* ChatViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275B329FAE91900B35544 /* ChatViewViewModel.swift */; };
+		FC1275B629FAF09600B35544 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275B529FAF09600B35544 /* CustomInputView.swift */; };
 		FCCE815D29F9505A00F2980C /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */; };
 		FCCE815F29F9571700F2980C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCE815E29F9571700F2980C /* GoogleService-Info.plist */; };
 		FCCE816229F9582C00F2980C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FCCE816129F9582C00F2980C /* FirebaseAuth */; };
@@ -49,6 +53,10 @@
 		FC1275A929FABF2C00B35544 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FC1275AB29FAC00400B35544 /* NewMessageViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewViewModel.swift; sourceTree = "<group>"; };
 		FC1275AD29FAC90300B35544 /* UserTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC1275AF29FAE61B00B35544 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		FC1275B129FAE63D00B35544 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		FC1275B329FAE91900B35544 /* ChatViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewViewModel.swift; sourceTree = "<group>"; };
+		FC1275B529FAF09600B35544 /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
 		FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		FCCE815E29F9571700F2980C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCCE816F29F95D8A00F2980C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -144,6 +152,7 @@
 				FCE1A4DE29F815B100F136D7 /* Authentication */,
 				FC1275AB29FAC00400B35544 /* NewMessageViewViewModel.swift */,
 				FC1275AD29FAC90300B35544 /* UserTableViewCellViewModel.swift */,
+				FC1275B329FAE91900B35544 /* ChatViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -155,6 +164,8 @@
 				FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */,
 				FC1275A329FAAC0300B35544 /* NewMessageView.swift */,
 				FC1275A529FABADA00B35544 /* UserTableViewCell.swift */,
+				FC1275B129FAE63D00B35544 /* ChatView.swift */,
+				FC1275B529FAF09600B35544 /* CustomInputView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,6 +176,7 @@
 				FCE1A4CF29F8065900F136D7 /* Authentication */,
 				FCE1A4CA29F7FBFF00F136D7 /* ConversationsViewController.swift */,
 				FC1275A129FAABC000B35544 /* NewMessageViewController.swift */,
+				FC1275AF29FAE61B00B35544 /* ChatViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -316,17 +328,21 @@
 				FC1275AE29FAC90300B35544 /* UserTableViewCellViewModel.swift in Sources */,
 				FCE1A4DA29F80A4000F136D7 /* Extensions.swift in Sources */,
 				FCE1A4D629F806D200F136D7 /* LoginView.swift in Sources */,
+				FC1275B629FAF09600B35544 /* CustomInputView.swift in Sources */,
 				FCCE817329F95FE800F2980C /* RegisterationModel.swift in Sources */,
 				FC1275A229FAABC000B35544 /* NewMessageViewController.swift in Sources */,
+				FC1275B429FAE91900B35544 /* ChatViewViewModel.swift in Sources */,
 				FCCE817529F9661600F2980C /* CostumErrors.swift in Sources */,
 				FCE1A4B329F7FABE00F136D7 /* SceneDelegate.swift in Sources */,
 				FC1275A829FABEB600B35544 /* User.swift in Sources */,
+				FC1275B029FAE61B00B35544 /* ChatViewController.swift in Sources */,
 				FCE1A4CB29F7FBFF00F136D7 /* ConversationsViewController.swift in Sources */,
 				FC1275AC29FAC00400B35544 /* NewMessageViewViewModel.swift in Sources */,
 				FC1275A429FAAC0300B35544 /* NewMessageView.swift in Sources */,
 				FCE1A4E229F815EE00F136D7 /* AuthTextFieldViewViewModel.swift in Sources */,
 				FCCE815D29F9505A00F2980C /* RegisterViewViewModel.swift in Sources */,
 				FC1275A629FABADA00B35544 /* UserTableViewCell.swift in Sources */,
+				FC1275B229FAE63D00B35544 /* ChatView.swift in Sources */,
 				FC1275AA29FABF2C00B35544 /* UserService.swift in Sources */,
 				FCE1A4D329F806B500F136D7 /* RegisterViewController.swift in Sources */,
 				FCE1A4DC29F8111B00F136D7 /* AuthTextFieldView.swift in Sources */,

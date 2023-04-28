@@ -8,5 +8,21 @@
 import Foundation
 
 struct UserTableViewCellViewModel {
-    let user: User
+    private let user: User
+    
+    init(user: User) {
+        self.user = user
+    }
+    
+    public var username: String {
+        user.username
+    }
+    
+    public var fullname: String {
+        user.fullname
+    }
+    
+    public var profileImageUrl: URL? {
+        URL(string: user.profileImageUrl)
+    }
 }

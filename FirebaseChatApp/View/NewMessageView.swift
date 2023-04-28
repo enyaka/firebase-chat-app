@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol NewMessageViewDelegate: AnyObject {
+    func showError(_ newMessageView: NewMessageView, withError error: String)
+    func dismissAndPresentChat(_ newMessageView: NewMessageView, withUser user: User)
+}
+
 final class NewMessageView: UIView {
     static let cellIdentifier = "NewMessageView"
     private let tableView: UITableView = {
@@ -18,6 +23,7 @@ final class NewMessageView: UIView {
         return tableView
     }()
     
+    public weak var delegate: NewMessageViewDelegate?
     private let viewModel = NewMessageViewViewModel()
     
     override init(frame: CGRect) {
@@ -57,7 +63,7 @@ final class NewMessageView: UIView {
                     self.handleLoader(true, withText: "Loading")
                 case .error(let error):
                     self.handleLoader(false)
-                    print(error)
+                    self.delegate?.showError(self, withError: error)
                 case .loaded:
                     self.handleLoader(false)
                     self.tableView.reloadData()
@@ -83,6 +89,7 @@ extension NewMessageView: UITableViewDataSource {
 extension NewMessageView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.dismissAndPresentChat(self, withUser: viewModel.users[indexPath.row])
     }
 }
 

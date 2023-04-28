@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol NewMessageViewControllerDelegate: AnyObject {
+    func newMessageViewController(_ newMessageViewController: NewMessageViewController, withUser user: User)
+}
+
 final class NewMessageViewController: UIViewController {
     
     private let newMessageView = NewMessageView()
+    public weak var delegate: NewMessageViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +24,8 @@ final class NewMessageViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        title = "New Message"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissController))
+        newMessageView.delegate = self
         view.addSubview(newMessageView)
     }
     
@@ -39,4 +44,13 @@ final class NewMessageViewController: UIViewController {
         }
     }
 
+}
+
+extension NewMessageViewController: NewMessageViewDelegate {
+    func dismissAndPresentChat(_ newMessageView: NewMessageView, withUser user: User) {
+        delegate?.newMessageViewController(self, withUser: user)
+    }
+    func showError(_ newMessageView: NewMessageView, withError error: String) {
+        presentError(error)
+    }
 }

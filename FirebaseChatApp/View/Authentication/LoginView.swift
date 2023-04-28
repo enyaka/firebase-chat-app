@@ -161,7 +161,6 @@ final class LoginView: UIView {
     }
     
     @objc func keyboardWillShow() {
-        print("G")
         if frame.origin.y == 0 {
             frame.origin.y -= 88
         }
@@ -171,8 +170,6 @@ final class LoginView: UIView {
         
         if frame.origin.y != 0 {
             frame.origin.y = 0
-            print("v")
-
         }
     }
     

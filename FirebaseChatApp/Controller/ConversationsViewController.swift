@@ -51,8 +51,7 @@ final class ConversationsViewController: UIViewController {
             try Auth.auth().signOut()
             presentLoginScreen()
         } catch {
-            print("DEBUG: Auth error")
-
+            presentError("Somethings happened when try to sign out.")
         }
     }
     
@@ -69,10 +68,21 @@ final class ConversationsViewController: UIViewController {
 extension ConversationsViewController: ConversationsViewProtocol {
     func newMessage(_ conservationView: ConversationsView) {
         let controller = NewMessageViewController()
+        controller.delegate = self
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
             self.present(nav, animated: true)
         }
+    }
+}
+
+extension ConversationsViewController: NewMessageViewControllerDelegate {
+    func newMessageViewController(_ newMessageViewController: NewMessageViewController, withUser user: User) {
+        newMessageViewController.dismiss(animated: false)
+        let chat = ChatViewController(user: user)
+        chat.title = user.username
+        chat.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(chat, animated: true)
     }
 }
