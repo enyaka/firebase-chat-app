@@ -16,7 +16,7 @@ protocol RegisterViewProtocol: AnyObject {
 
 final class RegisterView: UIView {
     
-    private let plusPhotoButton: UIButton = {
+    private lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "add_photo.png"), for: .normal)
@@ -47,7 +47,7 @@ final class RegisterView: UIView {
         return view
     }()
     
-    private let signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign Up", for: .normal)
@@ -61,14 +61,15 @@ final class RegisterView: UIView {
     }()
     
     private lazy var authStackView: UIStackView = {
-        let authStack = UIStackView(arrangedSubviews: [emailContainerView, fullnameContainerView, usernameContainerView, passwordContainerView, signUpButton])
+        let authStack = UIStackView(arrangedSubviews:
+                                        [emailContainerView, fullnameContainerView, usernameContainerView, passwordContainerView, signUpButton])
         authStack.translatesAutoresizingMaskIntoConstraints = false
         authStack.axis = .vertical
         authStack.spacing = 16
         return authStack
     }()
     
-    private let goToLoginButton: UIButton = {
+    private lazy var goToLoginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         let attributedTitle = NSMutableAttributedString(string: "Already have an account ", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white])

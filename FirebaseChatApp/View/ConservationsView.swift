@@ -23,7 +23,7 @@ final class ConversationsView: UIView {
         return tableView
     }()
     
-    private let newMessageFloatingButton: UIButton = {
+    private lazy var newMessageFloatingButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.backgroundColor = .systemBlue

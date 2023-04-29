@@ -37,7 +37,7 @@ final class LoginView: UIView {
         return view
     }()
     
-    private let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Login", for: .normal)
@@ -59,7 +59,7 @@ final class LoginView: UIView {
     }()
     
     
-    private let goToRegisterButton: UIButton = {
+    private lazy var goToRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account ", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white])

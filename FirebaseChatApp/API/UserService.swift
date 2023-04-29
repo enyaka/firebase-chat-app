@@ -7,12 +7,14 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 final class UserService {
     static let shared = UserService()
     private init() {}
     
     public func fetchUsers(completion: @escaping (Result<[User], CostumError>) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
         var users = [User]()
         Firestore.firestore().collection("users").getDocuments { [weak self] snapshot, error in
             if let error = error {
@@ -23,7 +25,7 @@ final class UserService {
             documents.forEach { data in
                 do {
                     let user = try data.data(as: User.self)
-                    users.append(user)
+                    if user.uid != uid { users.append(user) }
                 } catch {
                     completion(.failure(.failedToConvertDictionary))
                     return

@@ -40,7 +40,7 @@ final class RegisterViewViewModel: AuthenticationViewModelProtocol {
         AuthenticationService.shared.registerUser(registerInfo, imageData: imageData) { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let success):
+            case .success(_):
                 self.currentEvent?(.loaded)
             case .failure(let failure):
                 self.currentEvent?(.error(failure.localizedDescription))

@@ -15,7 +15,7 @@ final class AuthenticationService {
     static let shared = AuthenticationService()
     private init() {}
     
-    public func registerUser(_ registerInfo: RegisterationModel, imageData: Data, completion: @escaping (Result<Bool, CostumError>) -> Void) {
+    public func registerUser(_ registerInfo: RegisterationModel, imageData: Data, completion: @escaping (Result<Void, CostumError>) -> Void) {
         Auth.auth().createUser(withEmail: registerInfo.email, password: registerInfo.password) { [weak self] result, error in
             guard let self else { return }
             if let error = error {
@@ -39,7 +39,7 @@ final class AuthenticationService {
                             completion(.failure(.failedToUpdateDatabase(error.localizedDescription)))
                             return
                         }
-                        completion(.success(true))
+                        completion(.success(()))
                         return
                     }
                     

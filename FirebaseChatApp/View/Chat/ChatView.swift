@@ -10,10 +10,15 @@ import UIKit
 final class ChatView: UIView {
     
     private let collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let flowLayout = CommentFlowLayout()
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout.minimumInteritemSpacing = 10
+        flowLayout.minimumLineSpacing = 10
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CommentFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "deneme")
-        collectionView.backgroundColor = .green
+        collectionView.alwaysBounceVertical = true
+        collectionView.contentInsetAdjustmentBehavior = .always
+        collectionView.register(ChatViewCell.self, forCellWithReuseIdentifier: ChatViewCell.cellIdentifier)
         return collectionView
     }()
     
@@ -32,6 +37,7 @@ final class ChatView: UIView {
         configureUI()
         addConstraints()
         addNotifications()
+        addObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +48,8 @@ final class ChatView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .secondarySystemBackground
+        collectionView.backgroundColor = .systemBackground
+        textInputView.delegate = self
         addSubviews(collectionView, textInputView)
     }
     
@@ -65,6 +72,15 @@ final class ChatView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
+    }
+    
+    private func addObservers() {
+        viewModel.receiveMessage()
+        viewModel.bindToMessages { [weak self] in
+            guard let self else { return }
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItem(at: IndexPath(row: self.viewModel.messages.count - 1, section: 0), at: .bottom, animated: true)
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -110,10 +126,7 @@ final class ChatView: UIView {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardFrameValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-              let bottomConstraint = textInputViewBottomConstraint else {return}
-        let keyboardFrame = keyboardFrameValue.cgRectValue
+        guard let bottomConstraint = textInputViewBottomConstraint else {return}
         /// In here when keyboard will hide, i am resetting textInputView's bottom constraint
         bottomConstraint.constant = 0
         layoutIfNeeded()
@@ -125,18 +138,43 @@ final class ChatView: UIView {
 
 extension ChatView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        110
+        viewModel.messages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "deneme", for: indexPath)
-        cell.backgroundColor = .systemTeal
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatViewCell.cellIdentifier, for: indexPath) as? ChatViewCell else { fatalError("Wrond cell identifier") }
+        cell.configure(viewModel: .init(message: viewModel.messages[indexPath.row], profileImageUrl: viewModel.profileImageUrl))
         return cell
     }
-    
-    
 }
 
 extension ChatView: UICollectionViewDelegate {
     
+}
+
+extension ChatView: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let mock = ChatViewCell()
+//        mock.configure(viewModel: .init(message: viewModel.messages[indexPath.row], profileImageUrl: viewModel.profileImageUrl))
+//        print(mock.frame.height)
+////        let height = viewModel.messages[indexPath.row].text.height(withWidth: 250, font: .systemFont(ofSize: 16)) + 36
+//        return .init(width: frame.width, height: mock.frame.height)
+////        let frame = CGRect(x: 0, y: 0, width: frame.width, height: 50)
+////        let estimatedCellSize = ChatViewCell(frame: frame)
+////        estimatedCellSize.configure(viewModel: .init(message: viewModel.messages[indexPath.row], profileImageUrl: viewModel.profileImageUrl))
+////        estimatedCellSize.layoutIfNeeded()
+////        let targetSize = CGSize(width: frame.width, height: 1000)
+////        let estimatedSize = estimatedCellSize.systemLayoutSizeFitting(targetSize)
+////        return .init(width: frame.width, height: estimatedSize.height)
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+//    }
+}
+
+extension ChatView: CostumInputViewDelegate {
+    func inputView(_ costunInputView: CostumInputView, withMessage message: String) {
+        viewModel.sendMessage(message)
+    }
 }

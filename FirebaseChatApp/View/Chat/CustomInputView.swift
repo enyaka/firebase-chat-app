@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CostumInputViewDelegate: AnyObject {
+    func inputView(_ costunInputView: CostumInputView, withMessage message: String)
+}
+
 final class CostumInputView: UIView {
     
     public let messageInputView: UITextField = {
@@ -30,6 +34,8 @@ final class CostumInputView: UIView {
         return button
     }()
     
+    public weak var delegate: CostumInputViewDelegate?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -41,9 +47,12 @@ final class CostumInputView: UIView {
     }
     
     private func configureUI() {
-        backgroundColor = .red
         translatesAutoresizingMaskIntoConstraints = false
-//        backgroundColor = .systemBackground
+        backgroundColor = .systemBackground
+        layer.shadowOpacity = 0.15
+        layer.shadowRadius = 10
+        layer.shadowOffset = .init(width: 0, height: -10)
+        layer.shadowColor = UIColor.secondaryLabel.cgColor
         addSubviews(messageInputView, sendButton)
     }
     
@@ -62,6 +71,9 @@ final class CostumInputView: UIView {
     }
     
     @objc func sendTapped() {
-        print("Send")
+        guard let message = messageInputView.text,
+              !message.isEmpty else { return }
+        delegate?.inputView(self, withMessage: message)
+        messageInputView.text = ""
     }
 }
