@@ -24,9 +24,9 @@ final class ChatViewController: UIViewController {
         configureUI()
         addConstraints()
     }
-    
+
     private func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .blue
         view.addSubview(chatView)
     }
     

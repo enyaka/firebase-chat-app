@@ -9,19 +9,23 @@ import UIKit
 
 final class CostumInputView: UIView {
     
-    private let messageInputView: UITextView = {
-        let textView = UITextView()
+    public let messageInputView: UITextField = {
+        let textView = UITextField()
         textView.font = .systemFont(ofSize: 16)
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isScrollEnabled = false
+        textView.placeholder = "Enter message"
         return textView
     }()
     
     private lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Send", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.setTitleColor(.systemPurple, for: .normal)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .medium, scale: .large)
+        button.setImage(UIImage(systemName: "arrow.right.circle", withConfiguration: largeConfig), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
+        button.tintColor = .systemBlue
+        button.layer.cornerRadius = 40 / 2
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
         return button
     }()
@@ -30,35 +34,30 @@ final class CostumInputView: UIView {
         super.init(frame: frame)
         configureUI()
         addConstraints()
-        print("yeter")
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var intrinsicContentSize: CGSize {
-        return .zero
-    }
-    
     private func configureUI() {
-//        translatesAutoresizingMaskIntoConstraints = false
-        autoresizingMask = .flexibleHeight
         backgroundColor = .red
+        translatesAutoresizingMaskIntoConstraints = false
+//        backgroundColor = .systemBackground
         addSubviews(messageInputView, sendButton)
     }
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            messageInputView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            messageInputView.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -8),
-            messageInputView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4),
-            messageInputView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
             
-            sendButton.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            sendButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
-            sendButton.heightAnchor.constraint(equalToConstant: 15),
-            sendButton.widthAnchor.constraint(equalToConstant: 15),
+            messageInputView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            messageInputView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            messageInputView.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -10),
+            
+            sendButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            sendButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            sendButton.widthAnchor.constraint(equalToConstant: 40),
+            sendButton.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     

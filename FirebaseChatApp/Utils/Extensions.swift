@@ -24,11 +24,25 @@ extension UIViewController {
         let action = UIAlertAction(title: action, style: .cancel)
         alert.addAction(action)
         present(alert, animated: true)
-//        UIViewController.errorAlert.message = message
-//        UIViewController.errorAlert.title = title
-//        UIViewController.errorAlert.addAction(UIAlertAction(title: action, style: .cancel))
-//        present(UIViewController.errorAlert, animated: true)
-        
+    }
+}
+
+extension UIResponder {
+
+    private struct Static {
+        static weak var responder: UIResponder?
+    }
+
+    /// Finds the current first responder
+    /// - Returns: the current UIResponder if it exists
+    static func currentFirst() -> UIResponder? {
+        Static.responder = nil
+        UIApplication.shared.sendAction(#selector(UIResponder._trap), to: nil, from: nil, for: nil)
+        return Static.responder
+    }
+
+    @objc private func _trap() {
+        Static.responder = self
     }
 }
 
@@ -52,6 +66,11 @@ extension UIView {
         self.endEditing(true)
         UIView.hud.textLabel.text = text
         show ? UIView.hud.show(in: self) : UIView.hud.dismiss()
+    }
+    func getSafeAreaInsetBottom() -> CGFloat? {
+        guard let window = UIApplication.shared.windows.first else { return nil}
+        let bottomPadding = window.safeAreaInsets.bottom
+        return bottomPadding
     }
     
     /*
