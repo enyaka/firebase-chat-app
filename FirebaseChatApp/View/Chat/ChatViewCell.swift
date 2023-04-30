@@ -54,7 +54,6 @@ final class ChatViewCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        backgroundColor = .red
         addSubviews(profileImageView, bubbleView)
         bubbleView.addSubview(textView)
     }
@@ -67,6 +66,7 @@ final class ChatViewCell: UICollectionViewCell {
             profileImageView.widthAnchor.constraint(equalToConstant: 32),
             
             bubbleView.topAnchor.constraint(equalTo: topAnchor),
+            bubbleView.bottomAnchor.constraint(equalTo: bottomAnchor),
             bubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
 
             textView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 4),
@@ -78,11 +78,6 @@ final class ChatViewCell: UICollectionViewCell {
         bubbleViewLeftAnchor = bubbleView.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 12)
         bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
 
-    }
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
-            layoutAttributes.frame.size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            return layoutAttributes
     }
     
     public func configure(viewModel: ChatViewCellViewModel) {

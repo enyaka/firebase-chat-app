@@ -22,7 +22,6 @@
 		FC29AE6729FD75AE00C7193D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6629FD75AE00C7193D /* Message.swift */; };
 		FC29AE6A29FD7A8200C7193D /* ChatViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6929FD7A8200C7193D /* ChatViewCellViewModel.swift */; };
 		FC29AE6C29FD9A0400C7193D /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6B29FD9A0400C7193D /* ChatService.swift */; };
-		FC29AE6E29FDB22B00C7193D /* ChatFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6D29FDB22B00C7193D /* ChatFlowLayout.swift */; };
 		FCCE815D29F9505A00F2980C /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */; };
 		FCCE815F29F9571700F2980C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCE815E29F9571700F2980C /* GoogleService-Info.plist */; };
 		FCCE816229F9582C00F2980C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FCCE816129F9582C00F2980C /* FirebaseAuth */; };
@@ -66,7 +65,6 @@
 		FC29AE6629FD75AE00C7193D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FC29AE6929FD7A8200C7193D /* ChatViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC29AE6B29FD9A0400C7193D /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
-		FC29AE6D29FDB22B00C7193D /* ChatFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFlowLayout.swift; sourceTree = "<group>"; };
 		FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		FCCE815E29F9571700F2980C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCCE816F29F95D8A00F2980C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 			children = (
 				FCE1A4D929F80A4000F136D7 /* Extensions.swift */,
 				FCCE817429F9661600F2980C /* CostumErrors.swift */,
-				FC29AE6D29FDB22B00C7193D /* ChatFlowLayout.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -359,7 +356,6 @@
 				FC1275AE29FAC90300B35544 /* UserTableViewCellViewModel.swift in Sources */,
 				FCE1A4DA29F80A4000F136D7 /* Extensions.swift in Sources */,
 				FC29AE6729FD75AE00C7193D /* Message.swift in Sources */,
-				FC29AE6E29FDB22B00C7193D /* ChatFlowLayout.swift in Sources */,
 				FC29AE6529FD6FFF00C7193D /* ChatViewCell.swift in Sources */,
 				FCE1A4D629F806D200F136D7 /* LoginView.swift in Sources */,
 				FC1275B629FAF09600B35544 /* CustomInputView.swift in Sources */,

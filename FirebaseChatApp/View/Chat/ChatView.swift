@@ -9,15 +9,10 @@ import UIKit
 
 final class ChatView: UIView {
     
-    private let collectionView: UICollectionView = {
-        let flowLayout = CommentFlowLayout()
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        flowLayout.minimumInteritemSpacing = 10
-        flowLayout.minimumLineSpacing = 10
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CommentFlowLayout())
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.alwaysBounceVertical = true
-        collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.register(ChatViewCell.self, forCellWithReuseIdentifier: ChatViewCell.cellIdentifier)
         return collectionView
     }()
@@ -43,6 +38,7 @@ final class ChatView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -153,24 +149,19 @@ extension ChatView: UICollectionViewDelegate {
 }
 
 extension ChatView: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let mock = ChatViewCell()
-//        mock.configure(viewModel: .init(message: viewModel.messages[indexPath.row], profileImageUrl: viewModel.profileImageUrl))
-//        print(mock.frame.height)
-////        let height = viewModel.messages[indexPath.row].text.height(withWidth: 250, font: .systemFont(ofSize: 16)) + 36
-//        return .init(width: frame.width, height: mock.frame.height)
-////        let frame = CGRect(x: 0, y: 0, width: frame.width, height: 50)
-////        let estimatedCellSize = ChatViewCell(frame: frame)
-////        estimatedCellSize.configure(viewModel: .init(message: viewModel.messages[indexPath.row], profileImageUrl: viewModel.profileImageUrl))
-////        estimatedCellSize.layoutIfNeeded()
-////        let targetSize = CGSize(width: frame.width, height: 1000)
-////        let estimatedSize = estimatedCellSize.systemLayoutSizeFitting(targetSize)
-////        return .init(width: frame.width, height: estimatedSize.height)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let frame = CGRect(x: 0, y: 0, width: frame.width, height: 50)
+        let estimatedCellSize = ChatViewCell(frame: frame)
+        estimatedCellSize.configure(viewModel: .init(message: viewModel.messages[indexPath.row], profileImageUrl: viewModel.profileImageUrl))
+        estimatedCellSize.layoutIfNeeded()
+        let targetSize = CGSize(width: frame.width, height: 1000)
+        let estimatedSize = estimatedCellSize.systemLayoutSizeFitting(targetSize)
+        return .init(width: frame.width, height: estimatedSize.height)
+    }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    }
 }
 
 extension ChatView: CostumInputViewDelegate {
