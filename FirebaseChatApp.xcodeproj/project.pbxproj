@@ -18,10 +18,14 @@
 		FC1275B229FAE63D00B35544 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275B129FAE63D00B35544 /* ChatView.swift */; };
 		FC1275B429FAE91900B35544 /* ChatViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275B329FAE91900B35544 /* ChatViewViewModel.swift */; };
 		FC1275B629FAF09600B35544 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1275B529FAF09600B35544 /* CustomInputView.swift */; };
+		FC1492222A064848005DE81F /* Conservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1492212A064848005DE81F /* Conservation.swift */; };
+		FC1492262A0653C7005DE81F /* ConservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1492252A0653C7005DE81F /* ConservationTableViewCell.swift */; };
+		FC1492282A06540D005DE81F /* ConservationTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1492272A06540D005DE81F /* ConservationTableViewCellViewModel.swift */; };
 		FC29AE6529FD6FFF00C7193D /* ChatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6429FD6FFF00C7193D /* ChatViewCell.swift */; };
 		FC29AE6729FD75AE00C7193D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6629FD75AE00C7193D /* Message.swift */; };
 		FC29AE6A29FD7A8200C7193D /* ChatViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6929FD7A8200C7193D /* ChatViewCellViewModel.swift */; };
 		FC29AE6C29FD9A0400C7193D /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29AE6B29FD9A0400C7193D /* ChatService.swift */; };
+		FC3A45AB2A005DCE00736BD8 /* ConservationsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A45AA2A005DCE00736BD8 /* ConservationsViewViewModel.swift */; };
 		FCCE815D29F9505A00F2980C /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */; };
 		FCCE815F29F9571700F2980C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCE815E29F9571700F2980C /* GoogleService-Info.plist */; };
 		FCCE816229F9582C00F2980C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FCCE816129F9582C00F2980C /* FirebaseAuth */; };
@@ -61,15 +65,20 @@
 		FC1275B129FAE63D00B35544 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		FC1275B329FAE91900B35544 /* ChatViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewViewModel.swift; sourceTree = "<group>"; };
 		FC1275B529FAF09600B35544 /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		FC1492212A064848005DE81F /* Conservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conservation.swift; sourceTree = "<group>"; };
+		FC1492252A0653C7005DE81F /* ConservationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationTableViewCell.swift; sourceTree = "<group>"; };
+		FC1492272A06540D005DE81F /* ConservationTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC29AE6429FD6FFF00C7193D /* ChatViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewCell.swift; sourceTree = "<group>"; };
 		FC29AE6629FD75AE00C7193D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FC29AE6929FD7A8200C7193D /* ChatViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC29AE6B29FD9A0400C7193D /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		FC3A45AA2A005DCE00736BD8 /* ConservationsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationsViewViewModel.swift; sourceTree = "<group>"; };
 		FCCE815C29F9505A00F2980C /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		FCCE815E29F9571700F2980C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCCE816F29F95D8A00F2980C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		FCCE817229F95FE800F2980C /* RegisterationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationModel.swift; sourceTree = "<group>"; };
 		FCCE817429F9661600F2980C /* CostumErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumErrors.swift; sourceTree = "<group>"; };
+		FCD380632A0131E6007BB497 /* FirebaseChatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirebaseChatApp.entitlements; sourceTree = "<group>"; };
 		FCE1A4AD29F7FABE00F136D7 /* FirebaseChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE1A4B029F7FABE00F136D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCE1A4B229F7FABE00F136D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +114,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC1492232A065396005DE81F /* Conservation */ = {
+			isa = PBXGroup;
+			children = (
+				FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */,
+				FC1492252A0653C7005DE81F /* ConservationTableViewCell.swift */,
+			);
+			path = Conservation;
+			sourceTree = "<group>";
+		};
+		FC1492242A0653A5005DE81F /* Conservation */ = {
+			isa = PBXGroup;
+			children = (
+				FC3A45AA2A005DCE00736BD8 /* ConservationsViewViewModel.swift */,
+				FC1492272A06540D005DE81F /* ConservationTableViewCellViewModel.swift */,
+			);
+			path = Conservation;
+			sourceTree = "<group>";
+		};
 		FC29AE6329FD6FC500C7193D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +178,7 @@
 		FCE1A4AF29F7FABE00F136D7 /* FirebaseChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				FCD380632A0131E6007BB497 /* FirebaseChatApp.entitlements */,
 				FCE1A4C829F7FBCD00F136D7 /* API */,
 				FCE1A4C429F7FBB700F136D7 /* Model */,
 				FCE1A4C529F7FBBD00F136D7 /* ViewModel */,
@@ -170,6 +198,7 @@
 				FCCE817129F95FDB00F2980C /* Authentication */,
 				FC1275A729FABEB600B35544 /* User.swift */,
 				FC29AE6629FD75AE00C7193D /* Message.swift */,
+				FC1492212A064848005DE81F /* Conservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +206,7 @@
 		FCE1A4C529F7FBBD00F136D7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FC1492242A0653A5005DE81F /* Conservation */,
 				FC29AE6829FD7A7100C7193D /* Chat */,
 				FCE1A4DE29F815B100F136D7 /* Authentication */,
 				FC1275AB29FAC00400B35544 /* NewMessageViewViewModel.swift */,
@@ -188,9 +218,9 @@
 		FCE1A4C629F7FBC600F136D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FC1492232A065396005DE81F /* Conservation */,
 				FC29AE6329FD6FC500C7193D /* Chat */,
 				FCE1A4D429F806C500F136D7 /* Authentication */,
-				FCE1A4CD29F802AF00F136D7 /* ConservationsView.swift */,
 				FC1275A329FAAC0300B35544 /* NewMessageView.swift */,
 				FC1275A529FABADA00B35544 /* UserTableViewCell.swift */,
 			);
@@ -351,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3A45AB2A005DCE00736BD8 /* ConservationsViewViewModel.swift in Sources */,
 				FCE1A4E029F815C000F136D7 /* LoginViewViewModel.swift in Sources */,
 				FCE1A4B129F7FABE00F136D7 /* AppDelegate.swift in Sources */,
 				FC1275AE29FAC90300B35544 /* UserTableViewCellViewModel.swift in Sources */,
@@ -372,8 +403,11 @@
 				FCE1A4E229F815EE00F136D7 /* AuthTextFieldViewViewModel.swift in Sources */,
 				FCCE815D29F9505A00F2980C /* RegisterViewViewModel.swift in Sources */,
 				FC1275A629FABADA00B35544 /* UserTableViewCell.swift in Sources */,
+				FC1492282A06540D005DE81F /* ConservationTableViewCellViewModel.swift in Sources */,
 				FC29AE6C29FD9A0400C7193D /* ChatService.swift in Sources */,
 				FC1275B229FAE63D00B35544 /* ChatView.swift in Sources */,
+				FC1492262A0653C7005DE81F /* ConservationTableViewCell.swift in Sources */,
+				FC1492222A064848005DE81F /* Conservation.swift in Sources */,
 				FC1275AA29FABF2C00B35544 /* UserService.swift in Sources */,
 				FCE1A4D329F806B500F136D7 /* RegisterViewController.swift in Sources */,
 				FCE1A4DC29F8111B00F136D7 /* AuthTextFieldView.swift in Sources */,
@@ -518,6 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FirebaseChatApp/FirebaseChatApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L63L694K4M;
@@ -525,8 +560,8 @@
 				INFOPLIST_FILE = FirebaseChatApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -546,6 +581,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FirebaseChatApp/FirebaseChatApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L63L694K4M;
@@ -553,8 +589,8 @@
 				INFOPLIST_FILE = FirebaseChatApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

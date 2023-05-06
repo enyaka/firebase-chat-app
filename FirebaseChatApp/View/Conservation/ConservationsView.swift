@@ -8,16 +8,16 @@
 import UIKit
 
 protocol ConversationsViewProtocol: AnyObject {
-    func newMessage(_ conservationView: ConversationsView)
+    func newMessage(_ conversation: ConversationsView)
+    func conversationsView(_ conversation: ConversationsView, withUser user: User)
 }
 
 final class ConversationsView: UIView {
-    static let cellIdentifier = "tableviewcell"
     
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(ConservationTableViewCell.self, forCellReuseIdentifier: ConservationTableViewCell.cellIdentifier)
         tableView.rowHeight = 80
         tableView.tableFooterView = UIView()
         return tableView
@@ -35,11 +35,15 @@ final class ConversationsView: UIView {
     }()
     
     public weak var delegate: ConversationsViewProtocol?
+    private let viewModel: ConservationsViewViewModel = ConservationsViewViewModel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         addConstraints()
+        addObservers()
+        viewModel.fetchConservations()
+
     }
     
     required init?(coder: NSCoder) {
@@ -48,7 +52,6 @@ final class ConversationsView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        
         tableView.delegate = self
         tableView.dataSource = self
         addSubviews(tableView, newMessageFloatingButton)
@@ -68,6 +71,23 @@ final class ConversationsView: UIView {
         ])
     }
     
+    private func addObservers() {
+        viewModel.bindToEvent { [weak self] event in
+            guard let self else {return}
+            switch event {
+            case .loading:
+                print("DEBUG: Interesting")
+                self.handleLoader(true, withText: "Loading")
+            case .error(let string):
+                self.handleLoader(false)
+                print("DEBUG: Error \(string)")
+            case .loaded:
+                self.handleLoader(false)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     @objc func newMessageTapped() {
         delegate?.newMessage(self)
     }
@@ -76,12 +96,12 @@ final class ConversationsView: UIView {
 
 extension ConversationsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        viewModel.conservations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationsView.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = "Test cell"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ConservationTableViewCell.cellIdentifier, for: indexPath) as? ConservationTableViewCell else { fatalError("Wrong cell identifier")}
+        cell.configure(ConservationTableViewCellViewModel(conservation: viewModel.conservations[indexPath.row]))
         return cell
     }
 }
@@ -89,5 +109,7 @@ extension ConversationsView: UITableViewDataSource {
 extension ConversationsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let user = viewModel.conservations[indexPath.row].user
+        delegate?.conversationsView(self, withUser: user)
     }
 }

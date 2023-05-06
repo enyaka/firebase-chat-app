@@ -46,6 +46,22 @@ final class ConversationsViewController: UIViewController {
         }
     }
     
+    private func presentLoginScreen() {
+        DispatchQueue.main.async {
+            let vc = LoginViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
+    }
+    
+    private func showChatController(_ user: User) {
+        let chat = ChatViewController(user: user)
+        chat.title = user.username
+        chat.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(chat, animated: true)
+    }
+    
     @objc func showProfile() {
         do {
             try Auth.auth().signOut()
@@ -55,17 +71,14 @@ final class ConversationsViewController: UIViewController {
         }
     }
     
-    func presentLoginScreen() {
-        DispatchQueue.main.async {
-            let vc = LoginViewController()
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true)
-        }
-    }
+    
 }
 
 extension ConversationsViewController: ConversationsViewProtocol {
+    func conversationsView(_ conversation: ConversationsView, withUser user: User) {
+        showChatController(user)
+    }
+    
     func newMessage(_ conservationView: ConversationsView) {
         let controller = NewMessageViewController()
         controller.delegate = self
@@ -80,9 +93,6 @@ extension ConversationsViewController: ConversationsViewProtocol {
 extension ConversationsViewController: NewMessageViewControllerDelegate {
     func newMessageViewController(_ newMessageViewController: NewMessageViewController, withUser user: User) {
         newMessageViewController.dismiss(animated: false)
-        let chat = ChatViewController(user: user)
-        chat.title = user.username
-        chat.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(chat, animated: true)
+        showChatController(user)
     }
 }
