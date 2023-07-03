@@ -41,13 +41,16 @@ final class ChatViewViewModel {
     }
     
     public func receiveMessage() {
+        print("fetching messages")
         ChatService.shared.fetchMessages(forUser: user) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let success):
+                print("basarili")
                 self.messages = success
                 self.observeMessages?()
             case .failure(let failure):
+                print("basarisiz")
                 print(failure)
             }
         }

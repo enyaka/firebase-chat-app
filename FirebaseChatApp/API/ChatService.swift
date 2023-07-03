@@ -45,6 +45,7 @@ final class ChatService {
                 completion(.failure(.failedToFetchData(error.localizedDescription)))
                 return
             }
+
             guard let snapshot else { return }
             snapshot.documentChanges.forEach { change in
                 if change.type == .added {
@@ -60,9 +61,8 @@ final class ChatService {
     public func fetchConservations(completion: @escaping (Result<[Conservation], CostumError>) -> Void) {
         var conservations = [Conservation]()
         guard let currentUid = Auth.auth().currentUser?.uid else {return}
-        
         REF_MESSAGES.document(currentUid).collection("recent-messages").order(by: "timestamp").addSnapshotListener { [weak self] snapshot, error in
-            guard let self else {return}
+            guard let self else { return }
             if let error = error {
                 completion(.failure(.failedToFetchData(error.localizedDescription)))
                 return
@@ -71,7 +71,7 @@ final class ChatService {
             snapshot.documentChanges.forEach { change in
                 let dictionary = change.document.data()
                 let message = Message(dictionary: dictionary)
-                UserService.shared.fetchUser(uid: message.toId) { [weak self] result in
+                UserService.shared.fetchUser(uid: change.document.documentID) { [weak self] result in
                     switch result {
                     case .success(let success):
                         let conservation = Conservation(user: success, message: message)

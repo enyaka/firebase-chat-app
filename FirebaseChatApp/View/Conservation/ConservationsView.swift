@@ -42,7 +42,6 @@ final class ConversationsView: UIView {
         configureUI()
         addConstraints()
         addObservers()
-        viewModel.fetchConservations()
 
     }
     
@@ -76,7 +75,6 @@ final class ConversationsView: UIView {
             guard let self else {return}
             switch event {
             case .loading:
-                print("DEBUG: Interesting")
                 self.handleLoader(true, withText: "Loading")
             case .error(let string):
                 self.handleLoader(false)
@@ -86,6 +84,12 @@ final class ConversationsView: UIView {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    public func refreshConversations() {
+        viewModel.conservations = []
+        tableView.reloadData()
+        viewModel.fetchConservations()
     }
     
     @objc func newMessageTapped() {

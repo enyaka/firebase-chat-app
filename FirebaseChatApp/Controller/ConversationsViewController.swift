@@ -10,7 +10,7 @@ import FirebaseAuth
 
 final class ConversationsViewController: UIViewController {
     
-    private let conversationsView = ConversationsView()
+    private let conversationsView: ConversationsView =  ConversationsView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,11 @@ final class ConversationsViewController: UIViewController {
         configureUI()
         addConstraints()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        conversationsView.refreshConversations()
+    }
+    
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
@@ -48,6 +53,7 @@ final class ConversationsViewController: UIViewController {
     
     private func presentLoginScreen() {
         DispatchQueue.main.async {
+            self.dismiss(animated: true)
             let vc = LoginViewController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
